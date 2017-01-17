@@ -2,7 +2,8 @@ FROM python:2.7
 
 MAINTAINER Kevin Yu and copy from Sebastian Ramirez <tiangolo@gmail.com>
 # Install uWSGI
-RUN pip install uwsgi
+RUN pip install --upgrade pip \
+    && pip install uwsgi
 
 # Standard set up Nginx
 ENV NGINX_VERSION 1.9.11-1~jessie
@@ -29,7 +30,6 @@ COPY uwsgi.ini /etc/uwsgi/
 
 # Install Supervisord
 RUN apt-get update \
-    && pip install --upgrade pip \
     && apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/*
 # Custom Supervisord config
